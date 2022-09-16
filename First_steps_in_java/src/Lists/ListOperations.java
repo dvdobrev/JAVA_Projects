@@ -18,47 +18,52 @@ public class ListOperations {
             String command = data.get(0);
 
 
-            if (command.equals("Add")) {
-                int number = Integer.parseInt(data.get(1));
-                numbers.add(number);
+            switch (command) {
+                case "Add" -> {
+                    int number = Integer.parseInt(data.get(1));
+                    numbers.add(number);
 
-            } else if (command.equals("Insert")) {
-
-                int number = Integer.parseInt(data.get(1));
-                int index = Integer.parseInt(data.get(2));
-
-                if(index <= numbers.size() && index >= 0) {
-                    numbers.add(index, number);
-                } else {
-                    System.out.println("Invalid index");
+                    break;
                 }
+                case "Insert" -> {
 
+                    int number = Integer.parseInt(data.get(1));
+                    int index = Integer.parseInt(data.get(2));
 
-            } else if (command.equals("Remove")) {
-
-                int index = Integer.parseInt(data.get(1));
-                if(index <= numbers.size() && index >= 0) {
-                    numbers.remove(index);
-                } else {
-                    System.out.println("Invalid index");
+                    if (index <= numbers.size() && index >= 0) {
+                        numbers.add(index, number);
+                    } else {
+                        System.out.println("Invalid index");
+                    }
+                    break;
                 }
+                case "Remove" -> {
 
-            } else if (command.equals("Shift")) {
-                String direction = data.get(1);
-                int counts = Integer.parseInt(data.get(2));
-
-                if (direction.equals("left")) {
-                    for (int i = 0; i < counts; i++) {
-                        int firstNumber = numbers.get(0);
-                        numbers.remove(0);
-                        numbers.add(firstNumber);
+                    int index = Integer.parseInt(data.get(1));
+                    if (index <= numbers.size() && index >= 0) {
+                        numbers.remove(index);
+                    } else {
+                        System.out.println("Invalid index");
                     }
 
-                } else {
-                    for (int i = 0; i < counts; i++) {
-                        int lastNumber = numbers.get(numbers.size()-1);
-                        numbers.remove(numbers.size()-1);
-                        numbers.add(0, lastNumber);
+                    break;
+                }
+                case "Shift" -> {
+                    String direction = data.get(1);
+                    int counts = Integer.parseInt(data.get(2));
+                    if (direction.equals("left")) {
+                        for (int i = 0; i < counts; i++) {
+                            int firstNumber = numbers.get(0);
+                            numbers.remove(0);
+                            numbers.add(firstNumber);
+                        }
+
+                    } else {
+                        for (int i = 0; i < counts; i++) {
+                            int lastNumber = numbers.get(numbers.size() - 1);
+                            numbers.remove(numbers.size() - 1);
+                            numbers.add(0, lastNumber);
+                        }
                     }
                 }
             }
