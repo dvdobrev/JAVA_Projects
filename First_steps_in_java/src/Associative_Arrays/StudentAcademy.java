@@ -20,6 +20,7 @@ public class StudentAcademy {
         }
 
         students.entrySet().stream()
+                .filter(s -> s.getValue().stream().mapToDouble(Double::doubleValue).average().getAsDouble() >= 4.50)
                 .sorted((f, s) -> {
                     double firststudent = f.getValue()
                             .stream()
@@ -41,9 +42,8 @@ public class StudentAcademy {
                             .average()
                             .getAsDouble();
 
-                    if(average >= 4.50) {
-                        System.out.printf("%s -> %.2f%n", student.getKey(), average);
-                    }
+                    System.out.printf("%s -> %.2f%n", student.getKey(), average);
+
                 });
     }
 }
